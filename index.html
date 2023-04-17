@@ -5,10 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Email Client</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <table id="table">
-    </table>
+    <header>
+        <div id="logo">
+            <h1>Gmail</h1>
+        </div>
+        <div id="searchBoxWrapper">
+            <input type="text" id="searchBox"/>
+        </div>
+        
+    </header>
+    <main>
+        <aside>
+            <button value="inbox" id="inbox" class="sidebarButton">Inbox</button>
+            <button value="sent" id="sent" class="sidebarButton">Sent</button>
+            <button value="starred" id="starred" class="sidebarButton">Starred</button>
+            <button value="spam" id="spam" class="sidebarButton">Spam</button>
+        </aside>
+        <table id="table"></table>
+    </main>
 </body>
 <script src="index.js"></script>
 </html>

@@ -1,7 +1,12 @@
 //query selector
+const table = document.querySelector("#table")
+const searchBox = document.querySelector("#searchBox")
+const inbox = document.querySelector("#inbox")
+const sent = document.querySelector("#sent")
+const starred = document.querySelector("#starred")
+const spam = document.querySelector("#spam")
 
-let table = document.querySelector("table")
-
+//render functions and fetching api function
 function renderTableRow(email = {}){
     let tableRow = document.createElement('tr')
 
@@ -21,45 +26,32 @@ function renderTableRow(email = {}){
 }
 
 function renderTable(emailList = []){
+
     let tableBody = document.createElement('tbody');
 
     emailList.forEach(email => tableBody.append(renderTableRow(email)));
 
+    table.replaceChildren();
     table.append(tableBody)
 }
 
-function fetchEmailList(parameter = {}){
-    let emailList = [
-        { 
-            author : `Shailendra`, 
-            subjectLine: `Shailendra, your application was sent to Delhivery`,
-            description: `Dear Investor, With reference to NSE circular NSE/INSP/46704 dated December 17, 2020 ...`
-        },
-        { 
-            author : `Ravindra`, 
-            subjectLine: `Shailendra, your application was sent to Delhivery`,
-            description: `Dear Investor, With reference to NSE circular NSE/INSP/46704 dated December 17, 2020 ...`
-        },
-        { 
-            author : `Prabhu`, 
-            subjectLine: `Shailendra, your application was sent to Delhivery`,
-            description: `Dear Investor, With reference to NSE circular NSE/INSP/46704 dated December 17, 2020 ...`
-        },{ 
-            author : `Ashish`, 
-            subjectLine: `Shailendra, your application was sent to Delhivery`,
-            description: `Dear Investor, With reference to NSE circular NSE/INSP/46704 dated December 17, 2020 ...`
-        },
-        { 
-            author : `Yash`, 
-            subjectLine: `Shailendra, your application was sent to Delhivery`,
-            description: `Dear Investor, With reference to NSE circular NSE/INSP/46704 dated December 17, 2020 ...`
-        },{ 
-            author : `Akki`, 
-            subjectLine: `Shailendra, your application was sent to Delhivery`,
-            description: `Dear Investor, With reference to NSE circular NSE/INSP/46704 dated December 17, 2020 ...`
-        }
-    ]
-    renderTable(emailList);
+async function fetchEmailList({ searchString = null, type}){
+    const result = await fetch(`http://localhost:1080/getEmailList?searchString=${searchString}/?type=${type}`);
+    const emailList = await result.json();
+    renderTable(emailList.data);
 }
 
-fetchEmailList()
+//event listeners
+searchBox.addEventListener("keyup", (event)=>fetchEmailList({ searchString : event.target.value}))
+inbox.addEventListener("click", event=> fetchEmailList({type: event.target.value}))
+sent.addEventListener("click", event=> fetchEmailList({type: event.target.value}))
+starred.addEventListener("click", event=> fetchEmailList({type: event.target.value}))
+spam.addEventListener("click", event=> fetchEmailList({type: event.target.value}))
+
+//init program
+fetchEmailList({});
+
+/*things needs to be implemented
+1. Debounce
+2. Pagination
+*/

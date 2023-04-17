@@ -1,0 +1,52 @@
+body {
+    background-color: hsla(240,83.3%,95.3%,1);
+}
+
+header{
+    padding: 8px;
+    display: flex;
+    gap: 10px;
+}
+
+#searchBoxWrapper{
+    display: flex;
+    align-items: center;
+    width: 50%;
+}
+
+#searchBox{
+    display: flex;
+    height: 30%;
+    width: 100%;
+    border: 0px;
+    border-radius: 3px; 
+}
+
+main{
+    display: flex;
+    padding: 8px;
+}
+
+aside{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 8px; 
+}
+
+.sidebarButton{
+    border: 0px;
+    padding: 5px;
+    background: hsla(216,91%,91%,1);
+}
+
+
+table{
+    padding: 8px;
+    border: 2px black solid
+}
+
+tr {
+    border: 2px black solid
+}
+
